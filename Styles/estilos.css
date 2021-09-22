@@ -18,3 +18,17 @@ ul{
 .logo{
     height: 90px;
 }
+.boton{
+    background-color: blue;
+    color: white;
+    border: 0px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: bolder;     /* Pone la letra con mas relleno */   
+    box-shadow: 2px 2px rgb(126, 193, 219);     /* Pone sombra al boton */
+}
+/* Modificador de una clase, se pone : hover cuando se pasa el cursor como quiero que se vea */
+.boton:hover{
+    cursor: pointer;        /* Cuando paso el mouse cambia de flecha a manito */
+    transform: scale(1.1);  /* Agranda el boton cuando le paso el mouse */
+}
