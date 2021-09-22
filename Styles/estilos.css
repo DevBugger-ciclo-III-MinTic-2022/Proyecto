@@ -1,0 +1,17 @@
+body{
+    margin: 0px;
+}
+h4{
+    margin:0px;
+    padding:10px;
+}
+ul{
+    list-style: none;       /* quita las viñetas a la lista */
+    padding: 0px;       /* quita el padding o margen */
+    margin: 0px;
+}
+.navbar{
+    display:flex;           /* Los elementos de la lista queden uno al lado del otro */
+    justify-content: space-between;     /* Poner espacio entre los elementos */
+    padding: 10px;
+}
