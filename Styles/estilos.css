@@ -15,3 +15,6 @@ ul{
     justify-content: space-between;     /* Poner espacio entre los elementos */
     padding: 10px;
 }
+.logo{
+    height: 90px;
+}
