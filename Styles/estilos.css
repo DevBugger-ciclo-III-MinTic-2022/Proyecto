@@ -54,8 +54,8 @@ span{
 .contenedor-imagen{
     display:flex;
     justify-content: space-between;
-    padding: 10px 40px;
-    margin: 10px 150px;
+    padding: 20px 60px;
+    margin: 30px 150px;
     border-radius: 8px 8px;
     background-color: white;
     border: 1px solid gray;      /* Pone un borde para separar el header del main */
