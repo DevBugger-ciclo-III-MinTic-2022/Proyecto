@@ -1,0 +1,17 @@
+body{
+    margin: 0px;
+}
+
+ul{
+    list-style: none;       
+    padding: 0px;       
+    margin: 0px;
+}
+
+.logo1{
+    height: 90px;
+}
+
+.logo1 > img{
+    align-items: center;
+}
