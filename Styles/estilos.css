@@ -18,7 +18,7 @@ ul{
     display:flex;           /* Los elementos de la lista queden uno al lado del otro */
     justify-content: space-between;     /* Poner espacio entre los elementos */
     padding: 10px 40px;
-    background-color: rgb(215, 233, 243);
+    background-color: rgb(187, 243, 199);
     border-bottom: 1px solid gray;      /* Pone un borde para separar el header del main */
     box-shadow: 1px 1px solid gray;
 }
@@ -32,7 +32,7 @@ ul{
     height: 90px;
 }
 .boton{
-    background-color: blue;
+    background-color: rgb(20, 167, 86);
     color: white;
     border: 0px;
     padding: 5px 10px;
@@ -55,8 +55,10 @@ span{
     display:flex;
     justify-content: space-between;
     padding: 10px 40px;
+    margin: 10px 150px;
+    border-radius: 8px 8px;
     background-color: white;
-    border-bottom: 1px solid gray;      /* Pone un borde para separar el header del main */
+    border: 1px solid gray;      /* Pone un borde para separar el header del main */
     box-shadow: 1px 1px solid gray;
 }
 .contenedor-imagen > li{
