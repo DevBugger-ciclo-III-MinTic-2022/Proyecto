@@ -1,17 +1,98 @@
-body{
+ body{
     margin: 0px;
-}
+ }
 
-ul{
-    list-style: none;       
-    padding: 0px;       
+ ul{
+    list-style: none;       /* quita las viñetas a la lista */
+    padding: 0px;       /* quita el padding o margen */
     margin: 0px;
-}
+ }
 
-.logo1{
-    height: 90px;
-}
+ .mainContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+ }
 
-.logo1 > img{
-    align-items: center;
-}
+ .mainContainer > main{
+   height: 100%;
+ }
+
+ .mainContainer > footer{
+   background: linear-gradient(to right, rgb(79, 167, 108), rgba(126, 180, 144, 0.904));
+    padding: 10px;
+   
+ }
+
+ .navbar{
+    display:flex;           /* Los elementos de la lista queden uno al lado del otro */
+    padding: 10px 40px;
+    justify-content: center;
+    background: linear-gradient(to right, rgb(79, 167, 108), rgba(126, 180, 144, 0.904));
+    border-bottom: 2px solid gray;      /* Pone un borde para separar el header del main */
+    box-shadow: 1px 1px solid gray;
+ }
+
+ .navbar > span{
+     text-align: end;
+ }
+ 
+ .logo1{
+    height: auto;
+    width: auto;
+    max-height: 100px;
+    max-width: 100px;
+ }
+
+ .mainFooter{
+    display: flex;
+    padding: 5px;
+    margin-left: 48%;
+ }
+
+ .mainFooter > span{
+    margin-left: 15px;
+    padding-top: 7px;
+ }
+
+ .logo2{
+    display: flex;
+    height: 30px;
+    
+ }
+
+ .contenedor-login {
+    display: block;
+    justify-content:space-around;
+    background-color: rgb(79, 167, 108);
+    border: 1px solid rgb(36, 187, 111);
+    top: 40%;
+    left: 40%;
+    position: absolute;
+    padding: 30px;
+    border-radius: 8px;
+    
+  }
+
+  .contenedor-login > li{
+     padding-bottom: 20px;
+  }
+
+  .user{
+     display: flex;  
+  }
+
+  .user > input {
+   outline: none;
+   border: 0px;
+   margin-left: 8px;
+   border-radius: 8px;
+   padding: 3px;
+  }
+  
+
+  
+
+
+ 
+
