@@ -64,13 +64,14 @@
  .contenedor-login {
     display: block;
     justify-content:space-around;
-    background-color: rgb(79, 167, 108);
+    background-color: white;
     border: 1px solid rgb(36, 187, 111);
-    top: 40%;
+    top: 35%;
     left: 40%;
     position: absolute;
     padding: 30px;
     border-radius: 8px;
+    height: 200px;
     
   }
 
@@ -84,13 +85,34 @@
 
   .user > input {
    outline: none;
-   border: 0px;
+   border: 1px solid rgb(79, 167, 108);
+   margin-top: -4px;
    margin-left: 8px;
    border-radius: 8px;
-   padding: 3px;
+   padding: 5px;
+   font-size: 15px;
+  }
+
+  .contenedor-login > button{
+     outline: none;
+     border: 1px solid rgb(29, 70, 46);
+     background-color: rgb(79, 167, 108);
+     border-radius: 8px;
+     color: white;
+     font-size: 15px;
+     font-weight: bolder;
+     padding: 6px;
+     margin-left: 35%;
+     margin-top:30px;
+
+  }
+
+  label{
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+     font-size: 12px;
+     margin-left: 20px;
   }
   
-
   
 
 
