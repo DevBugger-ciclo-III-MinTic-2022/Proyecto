@@ -1,0 +1,74 @@
+body{
+  margin: 0px;
+}
+h4{
+  margin: 0px;
+  padding:0px;
+}
+
+h3{
+  text-align: center;
+}
+ul{
+  list-style: none;       /* quita las viñetas a la lista */
+  padding: 0px;       /* quita el padding o margen */
+  margin: 0px;
+}
+.navbar{
+  display:flex;           /* Los elementos de la lista queden uno al lado del otro */
+  justify-content: space-between;     /* Poner espacio entre los elementos */
+  padding: 10px 40px;
+  background-color: rgb(187, 243, 199);
+  border-bottom: 1px solid gray;      /* Pone un borde para separar el header del main */
+  box-shadow: 1px 1px solid gray;
+}
+
+.navbar > li{       /* Cualquier li que haya debajo del navbar que se le aplique las clases dentro de {} */
+  display: flex;
+  align-items:center;   
+}
+
+.logo{
+  height: 90px;
+}
+.boton{
+  background-color: rgb(20, 167, 86);
+  color: white;
+  border: 0px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bolder;     /* Pone la letra con mas relleno */   
+  box-shadow: 2px 2px rgb(126, 193, 219);     /* Pone sombra al boton */
+}
+/* Modificador de una clase, se pone : hover cuando se pasa el cursor como quiero que se vea */
+.boton:hover{
+  cursor: pointer;        /* Cuando paso el mouse cambia de flecha a manito */
+  transform: scale(1.1);  /* Agranda el boton cuando le paso el mouse */
+}
+
+span{
+  margin: 0px;
+  padding: 0px;
+}
+
+.contenedor-imagen{
+  display:flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  margin: 30px 150px;
+  border-radius: 8px 8px;
+  background-color: white;
+  border: 1px solid gray;      /* Pone un borde para separar el header del main */
+  box-shadow: 1px 1px solid gray;
+}
+.contenedor-imagen > li{
+  display: flex;
+  align-items:center;
+}
+
+img{
+  height: auto;
+  width: auto;
+  max-height: 100px;
+  max-width: 100px; 
+}
