@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Google from 'media/google_logo.png';
+import home from 'media/home.png'
 
 const Login = () => {
     return (
     <>
+    <Link to='/'>
+        <img src={home}  alt='imagen' className='h-9 w-9 mx-3 my-3 cursor-pointer hover:text-blue-600'/>    
+    </Link>
     <div className='max-w-md w-full space-y-8 mx-auto'>
       <h3 className='mt-6 text-center text-3xl font-extrabold text-green-600'>
         Inicia sesión en tu cuenta
