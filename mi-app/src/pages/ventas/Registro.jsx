@@ -5,6 +5,7 @@ const Registro = () => {
     return (
         <div>
            <div className='border-2 border-green-600 rounded-md w-3/5 mx-auto h-26'>
+                <label className='mx-3 text-green-600 font-bold'>Datos del cliente</label>
                <form className='flex flex-wrap justify-between'>
                    <input type='hidden' name='action' value='addCliente'></input>
                    <input type='hidden' id='idcliente' name='idcliente' value='' required></input>
@@ -25,13 +26,13 @@ const Registro = () => {
                        <input className='border-2 rounded-md mx-1' type='text' name='dir-cliente' id='dir-cliente' disabled required></input>
                    </div>
                    <div className='mx-2 my-2'>
-                       <button className='border-2 rounded-md p-1' type='submit'>Guardar</button>
+                       <button className='border-2 rounded-md p-1 bg-indigo-600' type='submit'>Guardar</button>
                    </div>
                </form>
             </div> 
             <div>
-                <h4>Datos de venta</h4>
-                <div>
+                <h4 className='text-center text-green-900 font-bold my-9'>Datos de venta</h4>
+                <div className='border-2 border-green-600 rounded-md w-3/5 mx-auto my-6 h-26 flex justify-between h-20'>
                     <div>
                         <label>Vendedor</label>
                         <p>Pepito Perez</p>
@@ -39,13 +40,13 @@ const Registro = () => {
                     <div>
                         <label>Acciones</label>
                         <div id='acciones-venta'>
-                            <button type='reset'>Anular</button>
-                            <button type='submit'>Comprar</button>
+                            <button className='border-2 bg-red-500 rounded-md p-1' type='reset'>Anular</button>
+                            <button className='border-2 bg-indigo-600 rounded-md p-1' type='submit'>Procesar</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <table className='mx-auto border-2 border-green-600'>
+            <table className='mx-auto border-2 border-green-600 my-9'>
                 <thead>
                     <tr>
                         <th className='border-2 border-green-600 text-center'>Referencia</th>
@@ -54,7 +55,7 @@ const Registro = () => {
                         <th className='border-2 border-green-600 text-center'>Cantidad</th>
                         <th className='border-2 border-green-600 text-center'>Precio unitario</th>
                         <th className='border-2 border-green-600 text-center'>Precio total</th>
-                        <th>Acción</th>
+                        <th className='border-2 border-green-600 text-center'>Acción</th>
                     </tr> 
                     <tr>
                         <td className='border-2 border-green-600 text-center'>
@@ -67,7 +68,7 @@ const Registro = () => {
                         </td>
                         <td className='border-2 border-green-600 text-center' id='precio-unitario'>0.00</td>
                         <td className='border-2 border-green-600 text-center' id='precio-total'>0.00</td>
-                        <td><button type='submit' id='agregar-producto'>Agregar producto</button></td>  
+                        <td><button className='border-2 bg-green-600 rounded-md p-1' type='submit' id='agregar-producto'>Agregar producto</button></td>  
                     </tr>
                     <tr>
                         <td className='border-2 border-green-600 text-center'>Referencia</td>
@@ -75,16 +76,17 @@ const Registro = () => {
                         <td className='border-2 border-green-600 text-center'>Cantidad</td>
                         <td className='border-2 border-green-600 text-center'>Precio</td>
                         <td className='border-2 border-green-600 text-center'>Precio total</td>
+                        <td className='border-2 border-green-600 text-center'>Accion</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td className='border-2 border-green-600 text-center'>1</td>
-                        <td className='border-2 border-green-600 text-center'>Curcuma</td>
+                        <td className='border-2 border-green-600 text-center'>ARS-001</td>
+                        <td className='border-2 border-green-600 text-center' colSpan='2'>Curcuma</td>
                         <td className='border-2 border-green-600 text-center'>1</td>
                         <td className='border-2 border-green-600 text-center'>7.000</td>
                         <td className='border-2 border-green-600 text-center'>7.000</td>
-                        <td className='border-2 border-green-600 text-center'><button>Eliminar</button></td>
+                        <td className='border-2 border-green-600 text-center'><button className='border-2 bg-red-500 rounded-md p-1'>Eliminar</button></td>
                     </tr>
                 </tbody>
                 <tfoot>
