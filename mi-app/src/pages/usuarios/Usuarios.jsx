@@ -1,7 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import home from 'media/home.png';
 
 const Usuarios = () => {
     return <div>
+        <Link to='/'>
+            <img src={home}  alt='imagen' className='h-9 w-9 mx-3 my-3 cursor-pointer hover:text-blue-600'/>    
+        </Link>
         <div className='flex w-2/4 mx-auto my-5'>
             <h2 className='text-green-500 mx-5'>Lista de Usuarios</h2>
             <button className='border-2 border-green-600 rounded-full p-2 text-green-600'>Agregar usuario</button>
