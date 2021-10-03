@@ -7,14 +7,14 @@ import Login from 'pages/usuarios/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PublicLayout from 'layouts/PublicLayout';
 import 'styles/styles.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import PrivateLayout from 'layouts/PrivateLayout';
 import AuthLayout from 'layouts/AuthLayout';
 
 
+
 function App() {
   return <Router>
-  <Switch>
+    <Switch>
     <Route path={['/ventas/registro', '/ventas/productos','/ventas/reportes']}>
       <PrivateLayout>
         <Switch>

@@ -3,7 +3,7 @@ import React from 'react';
 const Usuarios = () => {
     return <div>
         <div className='flex w-2/4 mx-auto my-5'>
-            <h3 className='text-green-500 mx-5'>Lista de Usuarios</h3>
+            <h2 className='text-green-500 mx-5'>Lista de Usuarios</h2>
             <button className='border-2 border-green-600 rounded-full p-2 text-green-600'>Agregar usuario</button>
         </div>
         <table className='w-2/4 bg-green-100 justify-between mx-auto my-20 border-collapse border-2 border-green-600'>
