@@ -1,47 +1,107 @@
-import producto1 from 'media/producto1.jpeg'
-import producto2 from 'media/producto2.jpeg'
+
 import React from 'react';
 
 const Registro = () => {
     return (
         <div>
+           <div className='border-2 border-green-600 rounded-md w-3/5 mx-auto h-26'>
+               <form className='flex flex-wrap justify-between'>
+                   <input type='hidden' name='action' value='addCliente'></input>
+                   <input type='hidden' id='idcliente' name='idcliente' value='' required></input>
+                   <div className='mx-2 my-2'>
+                       <label>Nit</label>
+                       <input type='text' name='nit-cliente' id='nit-cliente'className='border-2 rounded-md mx-1'></input>
+                   </div>
+                   <div className='mx-2 my-2'>
+                       <label>Nombre</label>
+                       <input className='border-2 rounded-md mx-1' type='text' name='nom-cliente' id='nom-cliente' disabled required></input>
+                   </div>
+                   <div className='mx-2 my-2'>
+                       <label>Telefono</label>
+                       <input className='border-2 rounded-md mx-1' type='number' name='tel-cliente' id='tel-cliente' disabled required></input>
+                   </div>
+                   <div className='mx-2 my-2'>
+                       <label>Direccion</label>
+                       <input className='border-2 rounded-md mx-1' type='text' name='dir-cliente' id='dir-cliente' disabled required></input>
+                   </div>
+                   <div className='mx-2 my-2'>
+                       <button className='border-2 rounded-md p-1' type='submit'>Guardar</button>
+                   </div>
+               </form>
+            </div> 
+            <div>
+                <h4>Datos de venta</h4>
+                <div>
+                    <div>
+                        <label>Vendedor</label>
+                        <p>Pepito Perez</p>
+                    </div>
+                    <div>
+                        <label>Acciones</label>
+                        <div id='acciones-venta'>
+                            <button type='reset'>Anular</button>
+                            <button type='submit'>Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table className='mx-auto border-2 border-green-600'>
-               <tr>
-                   <th className='border-2 border-green-600 text-center'>Imagen</th>
-                   <th className='border-2 border-green-600 text-center'>Nombre</th>
-                   <th className='border-2 border-green-600 text-center'>Referencia</th>
-                   <th className='border-2 border-green-600 text-center'>Cantidad</th>
-                   <th className='border-2 border-green-600 text-center'>Precio unitario</th>
-                   <th className='border-2 border-green-600 text-center'>Precio total</th>
-                </tr> 
-                <tr>
-                    <td className='border-2 border-green-600 text-center'><img src={producto1} alt="Producto1" className='h-20 px-7 my-3'/></td>
-                    <td className='border-2 border-green-600 text-center'>Harina de Garbanzo</td>
-                    <td className='border-2 border-green-600 text-center'>AR-001</td>
-                    <td className='border-2 border-green-600 text-center'><input type='number' id='valor1' min='1' max='15'></input></td>
-                    <td className='border-2 border-green-600 text-center'>23.000</td>
-                    <td className='border-2 border-green-600 text-center'>46.000</td>
-                </tr>
-                <tr>
-                    <td className='border-2 border-green-600 text-center'><img src={producto2} alt="Producto2" className='h-20 px-7 my-3'/></td>
-                    <td className='border-2 border-green-600 text-center'>Cereal multigrano</td>
-                    <td className='border-2 border-green-600 text-center'>AR-002</td>
-                    <td className='border-2 border-green-600 text-center'><input type='number' id='valor1' min='1' max='15'></input></td>
-                    <td className='border-2 border-green-600 text-center'>15.000</td>
-                    <td className='border-2 border-green-600 text-center'>15.000</td>
-                </tr>
-                <tr className='text-center'>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><span className='text-red-600 font-medium'>Total:</span><span className='font-medium'>61.000</span></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th className='border-2 border-green-600 text-center'>Referencia</th>
+                        <th className='border-2 border-green-600 text-center'>Descripción</th>
+                        <th className='border-2 border-green-600 text-center'>Existencia</th>
+                        <th className='border-2 border-green-600 text-center'>Cantidad</th>
+                        <th className='border-2 border-green-600 text-center'>Precio unitario</th>
+                        <th className='border-2 border-green-600 text-center'>Precio total</th>
+                        <th>Acción</th>
+                    </tr> 
+                    <tr>
+                        <td className='border-2 border-green-600 text-center'>
+                            <input type='text' name='ref-producto' id='id-ref-producto'></input>
+                        </td>
+                        <td className='border-2 border-green-600 text-center' id='descripcion'>-</td>
+                        <td className='border-2 border-green-600 text-center' id='existencia'>-</td>
+                        <td className='border-2 border-green-600 text-center'>
+                            <input type='text' name='cant-producto' id='cant-producto' value='0' min='1' disabled></input>
+                        </td>
+                        <td className='border-2 border-green-600 text-center' id='precio-unitario'>0.00</td>
+                        <td className='border-2 border-green-600 text-center' id='precio-total'>0.00</td>
+                        <td><button type='submit' id='agregar-producto'>Agregar producto</button></td>  
+                    </tr>
+                    <tr>
+                        <td className='border-2 border-green-600 text-center'>Referencia</td>
+                        <td className='border-2 border-green-600 text-center' colSpan='2'>Descripción</td>
+                        <td className='border-2 border-green-600 text-center'>Cantidad</td>
+                        <td className='border-2 border-green-600 text-center'>Precio</td>
+                        <td className='border-2 border-green-600 text-center'>Precio total</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td className='border-2 border-green-600 text-center'>1</td>
+                        <td className='border-2 border-green-600 text-center'>Curcuma</td>
+                        <td className='border-2 border-green-600 text-center'>1</td>
+                        <td className='border-2 border-green-600 text-center'>7.000</td>
+                        <td className='border-2 border-green-600 text-center'>7.000</td>
+                        <td className='border-2 border-green-600 text-center'><button>Eliminar</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan='5' className='border-2 border-green-600 text-center'>Subtotal</td>
+                        <td className='border-2 border-green-600 text-center'>7.000</td>
+                    </tr>
+                    <tr>
+                        <td colSpan='5' className='border-2 border-green-600 text-center'>IVA(19%)</td>
+                        <td className='border-2 border-green-600 text-center'>1.330</td>
+                    </tr>
+                    <tr>
+                        <td colSpan='5' className='border-2 border-green-600 text-center'>Total</td>
+                        <td className='border-2 border-green-600 text-center'>7.000</td>
+                    </tr>
+                </tfoot>
             </table>
-            <div className='flex justify-center'>
-                <button className='bg-green-600 border-2 rounded-full px-2 my-3'>Comprar</button>
-            </div>    
         </div>
     );
 };
