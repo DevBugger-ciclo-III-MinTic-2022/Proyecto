@@ -1,49 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
-import logo1 from './media/logo.png'
-import producto1 from './media/producto1.png'
-import producto2 from './media/producto2.png'
-import producto3 from './media/producto3.png'
+import Index from 'pages/Index';
+import Registro from 'pages/ventas/Registro';
+import Reportes from 'pages/ventas/Reportes';
+import Productos from 'pages/ventas/Productos';
+import Usuarios from 'pages/usuarios/Usuarios';
+import Login from 'pages/usuarios/Login';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PublicLayout from 'layouts/PublicLayout';
+import 'styles/styles.css';
+import PrivateLayout from 'layouts/PrivateLayout';
+import AuthLayout from 'layouts/AuthLayout';
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header>
-        <ul className="navbar">
-            <li>
-                <img src={logo1} alt='imagen' className="logo"/>
-            </li>
-            <li>
-                <button className="boton">Productos</button>
-            </li>
-            <li>
-                <button className="boton">Carrito</button>
-                <span>Antojate de lo natural</span>
-            </li>
-        </ul>
-    </header>
-    <main>
-        <section>
-            <h3>Destacados</h3>
-              <ul className="contenedor-imagen">
-                <li>
-                    <img src={producto1} alt="Producto1" />
-                </li>
-                <li>
-                    <img src={producto2} alt="Producto2" />
-                </li>
-                <li>
-                    <img src={producto3} alt="Producto3" />
-                </li>
-              </ul>
-        </section>
-        <section>
-            <h3>Nuestros clientes</h3>
-        </section>
-    </main>
-    <footer></footer>
-    </div>
-  );
-}
+  return <Router>
+    <Switch>
+    <Route path={['/ventas/registro', '/ventas/productos','/ventas/reportes']}>
+      <PrivateLayout>
+        <Switch>
+          <Route path='/ventas/registro'>
+            <Registro />
+          </Route>
+          <Route path='/ventas/productos'>
+            <Productos />
+          </Route>
+          <Route path='/ventas/reportes'>
+            <Reportes />
+          </Route>
+        </Switch>
+      </PrivateLayout>
+    </Route>
+    <Route path={['/usuarios', '/login']}>
+      <AuthLayout>
+        <Switch>
+          <Route path='/usuarios'>
+            <Usuarios />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+        </Switch>
+      </AuthLayout>
+    </Route>
+    <Route path={['/']}>
+      <PublicLayout>
+        <Route path='/'>
+          <Index />
+        </Route>
+      </PublicLayout>
+    </Route>
+  </Switch>
+</Router>;
+};
 
 export default App;
