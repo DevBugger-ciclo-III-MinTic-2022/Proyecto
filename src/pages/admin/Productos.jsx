@@ -6,10 +6,10 @@ import { Dialog, Tooltip } from '@material-ui/core';
 import { obtenerProductos } from 'utils/api';
 import 'react-toastify/dist/ReactToastify.css';
 
-const productos = () => {
+const Productos = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [productos, setProductos] = useState([]);
-  const [textoBoton, setTextoBoton] = useState('Crear Nuevo Vehículo');
+  const [textoBoton, setTextoBoton] = useState('Crear Nuevo producto');
   const [colorBoton, setColorBoton] = useState('indigo');
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
@@ -67,10 +67,10 @@ const productos = () => {
 
 const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   const [busqueda, setBusqueda] = useState('');
-  const [productosFiltrados, setproductosFiltrados] = useState(listaProductos);
+  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
 
   useEffect(() => {
-    setproductosFiltrados(
+    setProductosFiltrados(
       listaProductos.filter((elemento) => {
         return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
       })
@@ -101,7 +101,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
               return (
                 <FilaProducto
                   key={nanoid()}
-                  vehiculo={producto}
+                  producto={producto}
                   setEjecutarConsulta={setEjecutarConsulta}
                 />
               );
@@ -367,4 +367,4 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
   );
 };
 
-export default productos;
+export default Productos;
