@@ -1,26 +1,47 @@
+import { useDarkMode } from 'context/darkMode';
 import React from 'react';
-import {Link} from 'react-router-dom';
+import producto1 from 'media/producto1.jpeg'
+import producto2 from 'media/producto2.jpeg'
+import producto3 from 'media/producto3.jpeg'
+import producto4 from 'media/producto4.jpeg'
+import producto5 from 'media/producto5.jpeg'
+import producto6 from 'media/producto6.jpeg'
 
 const Index = () => {
-    return <nav>
-        <div>
-            <ul className='bg-blue-50 w-2/5 mx-auto my-24 justify-between h-12 relative rounded-md border-2'>
-                <li className='inline-block mx-6 my-3'><span className='text-blue-500 text-center p-2 mx-12 font-bold text-lg'>Ventas</span>
-                    <ul className='absolute my-1.5 border-2 bg-blue-50 rounded-md'>
-                        <li className='px-2 py-2 '><Link to='/ventas/registro' className='block no-underline hover:text-green-300'>Realizar Venta</Link></li>
-                        <li className='px-2 py-2'><Link to='/ventas/productos' className='block no-underline hover:text-green-300'>Listado de Productos</Link></li>
-                        <li className='px-2 py-2'><Link to='/ventas/reportes' className='block no-underline hover:text-green-300'>Informe de Ventas</Link></li>
-                    </ul> 
-                </li>   
-                <li className='inline-block mx-6 rounded-md'><span className='text-blue-500 text-center p-1 mx-9 font-bold text-lg'>Gestión de Usuarios</span>
-                    <ul className='absolute my-1.5 border-2 bg-blue-50 rounded-md'>
-                        <li className='px-2 py-2'><Link to='/usuarios' className='no-underline hover:text-green-300'>Listado de Usuarios</Link></li>
-                        <li className='px-2 py-2'><Link to='/login' className='block no-underline hover:text-green-300'>Login</Link></li>
-                    </ul>
-                </li>
-            </ul>
+  const { darkMode } = useDarkMode();
+  return (
+    <div>
+            <h2 className='text-center text-black-500 px-50 my-50 font-medium text-xl'>Productos Destacados</h2>
+            <div className='bg-green-500 border-2 rounded-lg h-36 w-3/5 mx-auto my-16'>
+                <ul className='flex justify-between'>
+                    <li>
+                        <img src={producto1} alt="Producto1" className='h-20 px-7 my-3'/>
+                        <span className='text-xs px-1 font-medium'>Harina de garbanzo</span>
+                    </li>
+                    <li>
+                        <img src={producto2} alt="Producto2" className='h-20 px-7 my-3'/>
+                        <span className='text-xs px-5 font-medium'>Cereal Multigrano</span>
+                    </li>
+                    <li>
+                        <img src={producto3} alt="Producto3" className='h-20 px-7 my-3'/>
+                        <span className='text-xs px-9 font-medium'>Colágeno</span>
+                    </li>
+                    <li>
+                        <img src={producto4} alt="Producto4" className='h-20 px-7 my-3'/> 
+                        <span className='text-xs px-6 font-medium'>Aromática de frutas</span>
+                    </li>
+                    <li>
+                        <img src={producto5} alt="Producto5" className='h-20 px-7 my-3'/>
+                        <span className='text-xs px-7 font-medium'>Calcio + fibra</span>
+                    </li> 
+                    <li>
+                        <img src={producto6} alt="Producto6" className='h-20 px-7 my-3'/>
+                        <span className='text-xs px-7 font-medium'>Cúrcuma</span>
+                    </li>
+                </ul>
             </div>
-    </nav>;
+        </div>
+    );
 };
 
 export default Index;

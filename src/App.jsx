@@ -1,56 +1,63 @@
-import Index from 'pages/Index';
-import Registro from 'pages/ventas/Registro';
-import Reportes from 'pages/ventas/Reportes';
-import Productos from 'pages/ventas/Productos';
-import Usuarios from 'pages/usuarios/Usuarios';
-import Login from 'pages/usuarios/Login';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import PublicLayout from 'layouts/PublicLayout';
-import 'styles/styles.css';
+import React, { useState, useEffect } from 'react';
 import PrivateLayout from 'layouts/PrivateLayout';
+import PublicLayout from 'layouts/PublicLayout';
+import Index from 'pages/Index';
+import Admin from 'pages/admin/Index';
+import Productos from 'pages/admin/Productos';
+import Login from 'pages/auth/Login';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'styles/styles.css';
+import Registro from 'pages/auth/Registro';
 import AuthLayout from 'layouts/AuthLayout';
-
-
+import { DarkModeContext } from 'context/darkMode';
 
 function App() {
-  return <Router>
-    <Switch>
-    <Route path={['/ventas/registro', '/ventas/productos','/ventas/reportes']}>
-      <PrivateLayout>
-        <Switch>
-          <Route path='/ventas/registro'>
-            <Registro />
-          </Route>
-          <Route path='/ventas/productos'>
-            <Productos />
-          </Route>
-          <Route path='/ventas/reportes'>
-            <Reportes />
-          </Route>
-        </Switch>
-      </PrivateLayout>
-    </Route>
-    <Route path={['/usuarios', '/login']}>
-      <AuthLayout>
-        <Switch>
-          <Route path='/usuarios'>
-            <Usuarios />
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-        </Switch>
-      </AuthLayout>
-    </Route>
-    <Route path={['/']}>
-      <PublicLayout>
-        <Route path='/'>
-          <Index />
-        </Route>
-      </PublicLayout>
-    </Route>
-  </Switch>
-</Router>;
-};
+  const [darkMode, setDarkMode] = useState(false);
+  useEffect(() => {
+    console.log('modo dark:', darkMode);
+  }, [darkMode]);
+
+  return (
+    <div className='App'>
+      <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+        <Router>
+          <Switch>
+            <Route path={['/admin', '/admin/productos']}>
+              <PrivateLayout>
+                <Switch>
+                  <Route path='/admin/productos'>
+                    <Productos />
+                  </Route>
+                  <Route path='/admin'>
+                    <Admin />
+                  </Route>
+                </Switch>
+              </PrivateLayout>
+            </Route>
+            <Route path={['/login', '/registro']}>
+              <AuthLayout>
+                <Switch>
+                  <Route path='/login'>
+                    <Login />
+                  </Route>
+                  <Route path='/registro'>
+                    <Registro />
+                  </Route>
+                </Switch>
+              </AuthLayout>
+            </Route>
+            <Route path={['/']}>
+              <PublicLayout>
+                <Route path='/'>
+                  <Index />
+                </Route>
+              </PublicLayout>
+            </Route>
+          </Switch>
+        </Router>
+      </DarkModeContext.Provider>
+    </div>
+  );
+}
 
 export default App;
