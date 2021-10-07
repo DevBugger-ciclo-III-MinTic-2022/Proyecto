@@ -1,21 +1,19 @@
-import Footer from 'componentes/Footer';
-import Navbar from 'componentes/Navbar';
-import React from 'react'
-import { Link } from 'react-router-dom';
-import home from 'media/home.png'
+import React from 'react';
+import Sidebar from 'componentes/Siderbar';
+import SidebarResponsive from 'componentes/SiderbarResponsive';
 
 const PrivateLayout = ({ children }) => {
-    return (
-        <div className='flex flex-col justify-between h-screen'>
-            <Navbar/>
-            <main className="h-full overflow-y-scrol">
-                <Link to='/'>
-                    <img src={home}  alt='imagen' className='h-9 w-9 mx-3 my-3 cursor-pointer hover:text-blue-600'/>    
-                </Link>
-                {children}</main>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className='flex w-screen h-screen'>
+      <div className='flex flex-col lg:flex-row flex-nowrap h-full w-full'>
+        <Sidebar />
+        <SidebarResponsive />
+        <main className='flex w-full  overflow-y-scroll items-center justify-center'>
+          {children}
+        </main>
+      </div>
+    </div>
+  );
 };
 
 export default PrivateLayout;
