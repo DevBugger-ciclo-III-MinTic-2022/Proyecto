@@ -10,6 +10,7 @@ import 'styles/styles.css';
 import Registro from 'pages/auth/Registro';
 import AuthLayout from 'layouts/AuthLayout';
 import { DarkModeContext } from 'context/darkMode';
+import Usuarios from 'pages/admin/Usuarios';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -22,11 +23,14 @@ function App() {
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
         <Router>
           <Switch>
-            <Route path={['/admin', '/admin/productos']}>
+            <Route path={['/admin', '/admin/productos', '/admin/usuarios']}>
               <PrivateLayout>
                 <Switch>
                   <Route path='/admin/productos'>
                     <Productos />
+                  </Route>
+                  <Route path='/admin/usuarios'>
+                    <Usuarios />
                   </Route>
                   <Route path='/admin'>
                     <Admin />

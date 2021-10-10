@@ -116,9 +116,9 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
         {productosFiltrados.map((el) => {
           return (
             <div className='bg-gray-400 m-2 shadow-xl flex flex-col p-2 rounded-xl'>
-              <span>{el.name}</span>
-              <span>{el.quantity}</span>
-              <span>{el.price}</span>
+              <span>{el.nombre}</span>
+              <span>{el.cantidad}</span>
+              <span>{el.precio}</span>
             </div>
           );
         })}
@@ -131,16 +131,16 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-    name: producto.name,
-    quantity: producto.quantity,
-    price: producto.price,
+    nombre: producto.nombre,
+    cantidad: producto.cantidad,
+    precio: producto.precio,
   });
 
   const actualizarProducto = async () => {
     //enviar la info al backend
     const options = {
       method: 'PATCH',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/update/',
+      url: 'http://localhost:5000/productos/editar/',
       headers: { 'Content-Type': 'application/json' },
       data: { ...infoNuevoProducto, id: producto._id },
     };
@@ -162,7 +162,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const eliminarProducto = async () => {
     const options = {
       method: 'DELETE',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/delete/',
+      url: 'http://localhost:5000/productos/eliminar/',
       headers: { 'Content-Type': 'application/json' },
       data: { id: producto._id },
     };
@@ -189,17 +189,17 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoProducto.name}
-              onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, name: e.target.value })}
+              value={infoNuevoProducto.nombre}
+              onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nombre: e.target.value })}
             />
           </td>
           <td>
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoProducto.quantity}
+              value={infoNuevoProducto.cantidad}
               onChange={(e) =>
-                setInfoNuevoProducto({ ...infoNuevoProducto, quantity: e.target.value })
+                setInfoNuevoProducto({ ...infoNuevoProducto, cantidad: e.target.value })
               }
             />
           </td>
@@ -207,18 +207,18 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
               type='text'
-              value={infoNuevoProducto.price}
+              value={infoNuevoProducto.precio}
               onChange={(e) =>
-                setInfoNuevoProducto({ ...infoNuevoProducto, model: e.target.value })
+                setInfoNuevoProducto({ ...infoNuevoProducto, precio: e.target.value })
               }
             />
           </td>
         </>
       ) : (
         <>
-          <td>{producto.name}</td>
-          <td>{producto.quantity}</td>
-          <td>{producto.price}</td>
+          <td>{producto.nombre}</td>
+          <td>{producto.cantidad}</td>
+          <td>{producto.precio}</td>
         </>
       )}
       <td>
@@ -295,9 +295,9 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
 
     const options = {
       method: 'POST',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/create',
+      url: 'http://localhost:5000/productos/nuevo/',
       headers: { 'Content-Type': 'application/json' },
-      data: { name: nuevoProducto.name, quantity: nuevoProducto.quantity, price: nuevoProducto.price },
+      data: { nombre: nuevoProducto.nombre, cantidad: nuevoProducto.cantidad, precio: nuevoProducto.precio },
     };
 
     await axios
@@ -321,7 +321,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
         <label className='flex flex-col' htmlFor='nombre'>
           Nombre del producto
           <input
-            name='name'
+            name='nombre'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
             type='text'
             placeholder='colageno'
@@ -330,30 +330,20 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
         </label>
         <label className='flex flex-col' htmlFor='cantidad'>
           Cantidad del Producto
-          <select
+          <input
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            name='quantity'
+            type='text'
+            name='cantidad'
+            placeholder='1'
             required
-            defaultValue={0}
-          >
-            <option disabled value={0}>
-              Seleccione una opción
-            </option>
-            <option>Renault</option>
-            <option>Toyota</option>
-            <option>Ford</option>
-            <option>Mazda</option>
-            <option>Chevrolet</option>
-          </select>
+          />
         </label>
         <label className='flex flex-col' htmlFor='precio'>
           Precio del Producto
           <input
-            name='price'
+            name='precio'
             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-            type='number'
-            min={1}
-            max={1000000}
+            type='text'
             placeholder='0000'
             required
           />
