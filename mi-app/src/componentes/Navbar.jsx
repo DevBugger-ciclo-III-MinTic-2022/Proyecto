@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TriggerDarkMode from './TriggerDarkMode';
 import logo from 'media/logo.png'
 
 const Navbar = () => {

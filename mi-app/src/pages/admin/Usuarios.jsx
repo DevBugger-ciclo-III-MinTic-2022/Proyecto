@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
-import { obtenerUsuarios } from 'utils/api';
+import { obtenerUsuarios, crearUsuario, editarUsuario, eliminarUsuario } from 'utils/api';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Usuarios = () => {
@@ -17,7 +16,15 @@ const Usuarios = () => {
   useEffect(() => {
     console.log('consulta', ejecutarConsulta);
     if (ejecutarConsulta) {
-      obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+      obtenerUsuarios(
+        (response)=>{
+          setUsuarios(response.data);
+        }, 
+        (error)=>{
+          console.error(error);
+        }
+      );
+      setEjecutarConsulta(false);
     }
   }, [ejecutarConsulta]);
 
@@ -129,6 +136,7 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
+    //_id: usuario._id,
     nombre: usuario.nombre,
     correo: usuario.correo,
     rol: usuario.rol,
@@ -136,46 +144,35 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
 
   const actualizarUsuario = async () => {
     //enviar la info al backend
-    const options = {
-      method: 'PATCH',
-      url: 'http://localhost:5000/usuarios/editar/',
-      headers: { 'Content-Type': 'application/json' },
-      data: { ...infoNuevoUsuario, id: usuario._id },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
+    await editarUsuario(usuario._id,
+      { nombre: infoNuevoUsuario.nombre,
+        correo: infoNuevoUsuario.correo,
+        rol: infoNuevoUsuario.rol,
+      },
+      (response)=>{
         console.log(response.data);
         toast.success('Usuario modificado con éxito');
         setEdit(false);
         setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
+      },
+      (error)=>{
         toast.error('Error modificando el usuario');
         console.error(error);
-      });
+      }
+    );    
   };
 
-  const eliminarUsuario = async () => {
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:5000/usuarios/eliminar/',
-      headers: { 'Content-Type': 'application/json' },
-      data: { id: usuario._id },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        toast.success('Usuario eliminado con éxito');
-        setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
-        console.error(error);
-        toast.error('Error eliminando el usuario');
-      });
+  const eliminarUsuarios = async () => {
+    await eliminarUsuario(usuario._id, (response)=>{
+      console.log(response.data);
+      toast.success('Usuario eliminado con éxito');
+      setEjecutarConsulta(true);
+    },
+    (error)=>{
+      console.error(error);
+      toast.error('Error eliminando el usuario');
+    }
+    );
     setOpenDialog(false);
   };
 
@@ -260,7 +257,7 @@ const FilaUsuario = ({ usuario, setEjecutarConsulta }) => {
             </h1>
             <div className='flex w-full items-center justify-center my-4'>
               <button
-                onClick={() => eliminarUsuario()}
+                onClick={() => eliminarUsuarios()}
                 className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
               >
                 Sí
@@ -290,25 +287,21 @@ const FormularioCreacionUsuarios = ({ setMostrarTabla, listaUsuarios, setUsuario
     fd.forEach((value, key) => {
       nuevoUsuario[key] = value;
     });
-
-    const options = {
-      method: 'POST',
-      url: 'http://localhost:5000/usuarios/nuevo/',
-      headers: { 'Content-Type': 'application/json' },
-      data: { nombre: nuevoUsuario.nombre, correo: nuevoUsuario.correo, rol: nuevoUsuario.rol },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
+    await crearUsuario ({
+      nombre: nuevoUsuario.nombre,
+      correo: nuevoUsuario.correo,
+      rol: nuevoUsuario.rol,
+      },
+      (response)=>{
         console.log(response.data);
         toast.success('Usuario agregado con éxito');
-      })
-      .catch(function (error) {
+      },
+      (error)=>{
         console.error(error);
         toast.error('Error creando un Usuario');
-      });
-
+      }
+    );
+      
     setMostrarTabla(true);
   };
 

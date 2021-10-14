@@ -1,4 +1,3 @@
-import { useDarkMode } from 'context/darkMode';
 import React from 'react';
 import producto1 from 'media/producto1.jpeg'
 import producto2 from 'media/producto2.jpeg'
@@ -9,7 +8,6 @@ import producto6 from 'media/producto6.jpeg'
 import {Tooltip} from '@material-ui/core';
 
 const Index = () => {
-  const { darkMode } = useDarkMode();
   return (
     <div>
         <h2 className='text-center text-green-800 my-9 font-medium text-xl'>Productos Destacados</h2>

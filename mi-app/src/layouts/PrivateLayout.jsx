@@ -8,7 +8,7 @@ const PrivateLayout = ({ children }) => {
       <div className='flex flex-col lg:flex-row flex-nowrap h-full w-full'>
         <Sidebar />
         <SidebarResponsive />
-        <main className='flex w-full  overflow-y-scroll items-center justify-center'>
+        <main className='flex w-full  overflow-y-scroll justify-center'>
           {children}
         </main>
       </div>
