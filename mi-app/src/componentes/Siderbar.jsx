@@ -2,10 +2,12 @@ import React from 'react';
 import ImagenLogo from './ImagenLogo';
 import { Link } from 'react-router-dom';
 import useActiveRoute from 'hooks/useActiveRoute';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Sidebar = () => {
+  const {logout} = useAuth0();
   return (
-    <nav className='hidden lg:flex lg:w-72 border border-gray-300 h-full flex-col bg-gray-200 p-4 sidebar'>
+    <nav className='hidden lg:flex lg:w-72 border border-green-300 h-full flex-col bg-green-200 p-4 sidebar'>
       <Link to='/admin'>
         <ImagenLogo />
       </Link>
@@ -16,7 +18,7 @@ const Sidebar = () => {
         <Ruta icono='fas fa-cash-register' ruta='/admin/ventas' nombre='Ventas' />
         <Ruta icono='fas fa-users' ruta='/admin/usuarios' nombre='Usuarios' />
       </div>
-      <button>Cerrar Sesión</button>
+      <button onClick={()=> logout({returnTo: window.location.origin})}>Cerrar Sesión</button>
     </nav>
   );
 };

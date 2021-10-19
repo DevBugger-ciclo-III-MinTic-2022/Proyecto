@@ -12,6 +12,7 @@ import AuthLayout from 'layouts/AuthLayout';
 import { DarkModeContext } from 'context/darkMode';
 import Usuarios from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -20,7 +21,12 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className='App'>
+    <Auth0Provider 
+      domain="misiontic-troliviano.us.auth0.com"
+      clientId="EPqXjd6kFTml6hmTKY6FuMLRQ83NFZEC"
+      redirectUri={window.location.origin}
+      audience='api-autenticacion-troliviano-mintic'>
+      <div className='App'>
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
         <Router>
           <Switch>
@@ -64,7 +70,8 @@ function App() {
           </Switch>
         </Router>
       </DarkModeContext.Provider>
-    </div>
+      </div>
+    </Auth0Provider>    
   );
 }
 

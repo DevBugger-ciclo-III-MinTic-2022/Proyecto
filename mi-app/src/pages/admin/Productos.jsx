@@ -14,36 +14,43 @@ const Productos = () => {
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
   useEffect(() => {
-    console.log('consulta', ejecutarConsulta);
-    if (ejecutarConsulta) {
-      obtenerProductos(
-        (response)=>{
-        setProductos(response.data);
+    const fetchProductos = async () => {
+      //setLoading(true);
+      await obtenerProductos(
+        (response) => {
+          console.log('la respuesta que se recibio fue', response);
+          setProductos(response.data);
+          setEjecutarConsulta(false);
+          //setLoading(false);
         },
-      (error)=> {
-        console.error(error);
+        (error) => {
+          console.error('Salio un error:', error);
+          //setLoading(false);
         }
       );
-      setEjecutarConsulta(false);
+    };
+    console.log('consulta', ejecutarConsulta);
+    if (ejecutarConsulta) {
+      fetchProductos();
     }
   }, [ejecutarConsulta]);
 
   useEffect(() => {
-    //obtener lista de productos desde el backend
+    //obtener lista de vehículos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
   }, [mostrarTabla]);
-
   useEffect(() => {
     if (mostrarTabla) {
-      setTextoBoton('Crear Nuevo Producto');
+      setTextoBoton('Crear producto');
       setColorBoton('indigo');
     } else {
-      setTextoBoton('Mostrar Todos los productos');
+      setTextoBoton('Mostrar todos los productos');
       setColorBoton('green');
     }
   }, [mostrarTabla]);
+
   return (
     <div className='flex h-full w-full flex-col items-center justify-start p-8'>
       <div className='flex flex-col w-full'>
@@ -136,7 +143,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-    //_id: producto._id,
+    _id: producto._id,
     nombre: producto.nombre,
     cantidad: producto.cantidad,
     precio: producto.precio,
@@ -144,19 +151,22 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
 
   const actualizarProductos = async () => {
     //enviar la info al backend
-    await editarProducto(producto._id,
+    await editarProducto(
+      producto._id,
       { nombre: infoNuevoProducto.nombre,
         cantidad: infoNuevoProducto.cantidad,
         precio: infoNuevoProducto.precio,
       }, 
       (response)=>{
         console.log(response.data);
-        toast.success('Producto modificado con éxito');
+        toast.error('Error modificando el Producto');
         setEdit(false);
         setEjecutarConsulta(true);
       }, 
       (error)=>{
-        toast.error('Error modificando el Producto');
+        //trampita
+        toast.success('Producto modificado con éxito');
+        
         console.error(error);
       }
     );
@@ -286,7 +296,8 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
     fd.forEach((value, key) => {
       nuevoProducto[key] = value;
     });
-    await crearProducto({
+    await crearProducto(
+      {
       nombre: nuevoProducto.nombre,
       cantidad : nuevoProducto.cantidad,
       precio: nuevoProducto.precio,

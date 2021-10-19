@@ -52,25 +52,18 @@ const Ventas = () => {
     const listaProductos = Object.keys(formData)
       .map((k) => {
         if (k.includes('producto')) {
-          return productosTabla.filter((v) => v._id === formData[k])[0];
+          return productosTabla.filter((p) => p._id === formData[k])[0];
         }
         return null;
       })
-      .filter((v) => v);
+      .filter((p) => p);
 
     console.log('lista antes de cantidad', listaProductos);
-
-    Object.keys(formData).forEach((k) => {
-      if (k.includes('cantidad')) {
-        const indice = parseInt(k.split('_')[1]);
-        listaProductos[indice]['cantidad'] = formData[k];
-      }
-    });
 
     console.log('lista despues de cantidad', listaProductos);
 
     const datosVenta = {
-      vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+      vendedor: vendedores.filter((p) => p._id === formData.vendedor)[0],
       cantidad: formData.valor,
       productos: listaProductos,
     };
@@ -89,14 +82,14 @@ const Ventas = () => {
   };
 
   return (
-    <div className='flex h-full w-full items-center justify-center'>
+    <div className='flex h-full w-full items-center justify-center my-9'>
       <form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
-        <h1 className='text-3xl font-extrabold text-gray-900 my-3'>Crear una nueva venta</h1>
+        <h1 className='text-3xl font-extrabold text-gray-900 my-3'>Registrar venta</h1>
         <label className='flex flex-col' htmlFor='vendedor'>
-          <span className='text-2xl font-gray-900'>Vendedor</span>
+          <span className='text-2xl font-gray-900'>***Informacion General***</span>
           <select name='vendedor' className='p-2' defaultValue='' required >
             <option value='' disabled>
-              Seleccione un Vendedor
+              Vendedor:
             </option>
             {vendedores.map((el) => {
               return <option key={nanoid()} value={el._id}>{`${el.nombre}`}</option>;
@@ -121,7 +114,7 @@ const Ventas = () => {
         </label>
         <button
           type='submit'
-          className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
+          className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-300 text-green-900 font-bold'
         >
           Crear Venta
         </button>
@@ -166,7 +159,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
             }
           >
             <option disabled value=''>
-              Seleccione un Producto
+              Producto:
             </option>
             {productos.map((el) => {
               return (
@@ -181,7 +174,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         <button
           type='button'
           onClick={() => agregarNuevoProducto()}
-          className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
+          className='bg-green-600 p-2 rounded-full shadow-md hover:bg-green-900 text-white mx-9'
         >
           Agregar Producto
         </button>
