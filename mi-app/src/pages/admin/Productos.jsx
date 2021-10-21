@@ -171,13 +171,14 @@ const FilaProducto = ({ producto, setEjecutarConsulta, setMostrarTabla }) => {
       }, 
       (response)=>{
         console.log(response.data);
-        toast.error('Error modificando el Producto');
+        toast.success('Producto modificado con éxito');
+        
         setEdit(false);
         setEjecutarConsulta(true);
       }, 
       (error)=>{
-        //trampita
-        toast.success('Producto modificado con éxito');    
+
+        toast.error('Error modificando el Producto');   
         console.error(error);
       }
     );
