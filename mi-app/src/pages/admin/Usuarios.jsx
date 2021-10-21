@@ -1,4 +1,3 @@
-//import PrivateComponent from 'componentes/PrivateComponent.jsx';
 import { nanoid } from 'nanoid';
 import React, { useState, useEffect } from 'react';
 import { editarUsuario } from 'utils/api';
@@ -25,9 +24,6 @@ const Usuarios = () => {
   return (
     <div>
       <div>admin usuarios</div>
-      
-        <button className='bg-red-400'>Hola RBAC</button>
-      
       <table className='tabla'>
         <thead>
           <tr>

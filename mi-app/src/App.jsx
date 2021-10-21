@@ -13,9 +13,12 @@ import { DarkModeContext } from 'context/darkMode';
 import Usuarios from 'pages/admin/Usuarios';
 import Ventas from 'pages/admin/Ventas';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { UserContext } from 'context/userContext';
+import PrivateRoute from 'componentes/PrivateRoute';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     console.log('modo dark:', darkMode);
   }, [darkMode]);
@@ -24,9 +27,11 @@ function App() {
     <Auth0Provider 
       domain="misiontic-troliviano.us.auth0.com"
       clientId="EPqXjd6kFTml6hmTKY6FuMLRQ83NFZEC"
-      redirectUri={window.location.origin}
+      redirectUri='http://localhost:3000/admin'
       audience='api-autenticacion-troliviano-mintic'>
+
       <div className='App'>
+        <UserContext.Provider value={{userData, setUserData}}>
       <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
         <Router>
           <Switch>
@@ -34,13 +39,19 @@ function App() {
               <PrivateLayout>
                 <Switch>
                   <Route path='/admin/productos'>
-                    <Productos />
+                    <PrivateRoute roleList={['admin']}>
+                      <Productos />
+                    </PrivateRoute>
                   </Route>
                   <Route path='/admin/usuarios'>
+                   <PrivateRoute roleList={['admin']}>
                     <Usuarios />
+                  </PrivateRoute>
                   </Route>
                   <Route path='/admin/ventas'>
+                   <PrivateRoute roleList={['admin', 'vendedor']}>
                     <Ventas />
+                    </PrivateRoute>
                   </Route>
                   <Route path='/admin'>
                     <Admin />
@@ -70,6 +81,7 @@ function App() {
           </Switch>
         </Router>
       </DarkModeContext.Provider>
+      </UserContext.Provider>
       </div>
     </Auth0Provider>    
   );

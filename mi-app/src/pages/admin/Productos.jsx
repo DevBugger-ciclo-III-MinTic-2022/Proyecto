@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
+import ReactLoading from 'react-loading';
 import { obtenerProductos, crearProducto, editarProducto, eliminarProducto } from 'utils/api';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateComponent from 'componentes/PrivateComponent';
 
 
 const Productos = () => {
@@ -12,20 +14,21 @@ const Productos = () => {
   const [textoBoton, setTextoBoton] = useState('Crear Nuevo producto');
   const [colorBoton, setColorBoton] = useState('indigo');
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchProductos = async () => {
-      //setLoading(true);
+      setLoading(true);
       await obtenerProductos(
         (response) => {
           console.log('la respuesta que se recibio fue', response);
           setProductos(response.data);
           setEjecutarConsulta(false);
-          //setLoading(false);
+          setLoading(false);
         },
         (error) => {
           console.error('Salio un error:', error);
-          //setLoading(false);
+          setLoading(false);
         }
       );
     };
@@ -36,7 +39,7 @@ const Productos = () => {
   }, [ejecutarConsulta]);
 
   useEffect(() => {
-    //obtener lista de vehículos desde el backend
+    //obtener lista de productos desde el backend
     if (mostrarTabla) {
       setEjecutarConsulta(true);
     }
@@ -67,7 +70,10 @@ const Productos = () => {
         </button>
       </div>
       {mostrarTabla ? (
-        <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
+        <TablaProductos 
+        loading={loading}
+        listaProductos={productos} 
+        setEjecutarConsulta={setEjecutarConsulta} />
       ) : (
         <FormularioCreacionProductos
           setMostrarTabla={setMostrarTabla}
@@ -80,7 +86,7 @@ const Productos = () => {
   );
 };
 
-const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
+const TablaProductos = ({ loading, listaProductos, setEjecutarConsulta }) => {
   const [busqueda, setBusqueda] = useState('');
   const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
 
@@ -102,13 +108,18 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
       />
       <h2 className='text-2xl font-extrabold text-gray-800'>Todos los productos</h2>
       <div className='hidden md:flex w-full'>
+        {loading ? (
+          <ReactLoading type='cylon' color='#abc123' height={667} width={375} />
+        ) : (
         <table className='tabla'>
           <thead>
             <tr>
               <th>Nombre del producto</th>
               <th>cantidad del producto</th>
               <th>precio del producto</th>
-              <th>Acciones</th>
+              <PrivateComponent roleList={['admin']}>
+                <th>Acciones</th>
+              </PrivateComponent>
             </tr>
           </thead>
           <tbody>
@@ -123,6 +134,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
             })}
           </tbody>
         </table>
+        )}
       </div>
       <div className='flex flex-col w-full m-2 md:hidden'>
         {productosFiltrados.map((el) => {
@@ -139,7 +151,7 @@ const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
   );
 };
 
-const FilaProducto = ({ producto, setEjecutarConsulta }) => {
+const FilaProducto = ({ producto, setEjecutarConsulta, setMostrarTabla }) => {
   const [edit, setEdit] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
@@ -165,15 +177,16 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
       }, 
       (error)=>{
         //trampita
-        toast.success('Producto modificado con éxito');
-        
+        toast.success('Producto modificado con éxito');    
         console.error(error);
       }
     );
   };
 
   const eliminarProductos = async () => {
-    await eliminarProducto(producto._id, (response)=>{
+    await eliminarProducto(
+      producto._id, 
+      (response)=>{
       console.log(response.data);
       toast.success('Producto eliminado con éxito');
       setEjecutarConsulta(true);
@@ -189,6 +202,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
     <tr>
       {edit ? (
         <>
+        <td>{infoNuevoProducto._id}</td>
           <td>
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -225,6 +239,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           <td>{producto.precio}</td>
         </>
       )}
+      <PrivateComponent roleList={['admin']}>
       <td>
         <div className='flex w-full justify-around'>
           {edit ? (
@@ -281,6 +296,7 @@ const FilaProducto = ({ producto, setEjecutarConsulta }) => {
           </div>
         </Dialog>
       </td>
+      </PrivateComponent>
     </tr>
   );
 };
@@ -296,6 +312,7 @@ const FormularioCreacionProductos = ({ setMostrarTabla, listaProductos, setProdu
     fd.forEach((value, key) => {
       nuevoProducto[key] = value;
     });
+    
     await crearProducto(
       {
       nombre: nuevoProducto.nombre,
