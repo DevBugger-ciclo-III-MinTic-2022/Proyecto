@@ -49,7 +49,7 @@ export const eliminarProducto = async (id, successCallback, errorCallback) => {
 //*****CRUD PARA LOS USUARIOS*****
 
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
-  const options = { method: 'GET', url: `${baseURL}/usuarios`, 
+  const options = { method: 'GET', url: `${baseURL}/usuarios/`, 
   headers: {Authorization: getToken(),
   },
 };
@@ -57,7 +57,7 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
 };
 
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
-  const options = { method: 'GET', url: `${baseURL}/usuarios/self`, 
+  const options = { method: 'GET', url: `${baseURL}/usuarios/self/`, 
   headers: {Authorization: getToken(),
   },
 };
