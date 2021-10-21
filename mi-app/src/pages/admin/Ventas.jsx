@@ -193,9 +193,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
       <table className='tabla'>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th> 
-            <th>Valor Unitario</th>      
+            <th>Nombre</th> 
+            <th>Valor Unitario</th>    
+            <th>Unidad</th>  
             <th>Total</th>
             <th>Eliminar</th>
             <th className='hidden'>Input</th>
