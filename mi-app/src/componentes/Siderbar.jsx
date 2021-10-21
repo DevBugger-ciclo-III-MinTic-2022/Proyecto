@@ -9,7 +9,7 @@ const Sidebar = () => {
   const {user, logout} = useAuth0();
 
   const cerrarSesion = ()=>{
-    logout({returnTo: 'http://localhost:3000'})
+    logout({returnTo: 'https://murmuring-castle-83151.herokuapp.com/'})
     localStorage.setItem("token", null)
   }
   return (
