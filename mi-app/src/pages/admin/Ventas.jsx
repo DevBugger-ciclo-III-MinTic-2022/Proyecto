@@ -10,7 +10,7 @@ const Ventas = () => {
   const [vendedores, setVendedores] = useState([]);
   const [productos, setProductos] = useState([]);
   const [productosTabla, setProductosTabla] = useState([]);
- 
+ //esto es un comentario
 
   useEffect(() => {
     const fetchVendedores = async () => {
