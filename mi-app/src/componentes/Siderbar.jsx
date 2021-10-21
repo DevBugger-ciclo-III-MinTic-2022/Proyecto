@@ -9,7 +9,7 @@ const Sidebar = () => {
   const {user, logout} = useAuth0();
 
   const cerrarSesion = ()=>{
-    logout({returnTo: 'https://murmuring-castle-83151.herokuapp.com/'})
+    logout({returnTo: 'https://vast-gorge-29367.herokuapp.com/'})
     localStorage.setItem("token", null)
   }
   return (
