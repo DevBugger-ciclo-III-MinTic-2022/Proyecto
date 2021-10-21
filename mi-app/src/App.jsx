@@ -27,7 +27,7 @@ function App() {
     <Auth0Provider 
       domain="misiontic-troliviano.us.auth0.com"
       clientId="EPqXjd6kFTml6hmTKY6FuMLRQ83NFZEC"
-      redirectUri='http://localhost:3000/admin'
+      redirectUri='https://vast-gorge-29367.herokuapp.com/admin'
       audience='api-autenticacion-troliviano-mintic'>
 
       <div className='App'>
