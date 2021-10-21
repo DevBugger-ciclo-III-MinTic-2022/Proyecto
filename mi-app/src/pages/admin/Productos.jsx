@@ -203,7 +203,6 @@ const FilaProducto = ({ producto, setEjecutarConsulta, setMostrarTabla }) => {
     <tr>
       {edit ? (
         <>
-        <td>{infoNuevoProducto._id}</td>
           <td>
             <input
               className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
