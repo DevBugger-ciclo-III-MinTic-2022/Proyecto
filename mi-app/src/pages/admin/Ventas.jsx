@@ -10,6 +10,10 @@ const Ventas = () => {
   const [vendedores, setVendedores] = useState([]);
   const [productos, setProductos] = useState([]);
   const [productosTabla, setProductosTabla] = useState([]);
+  const [textoBoton, setTextoBoton] = useState('Listar ventas');
+  const [colorBoton, setColorBoton] = useState('indigo');
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+  const [loading, setLoading] = useState(false);
  //esto es un comentario
 
   useEffect(() => {
@@ -38,6 +42,22 @@ const Ventas = () => {
     fetchVendedores();
     fetchProductos();
   }, []);
+
+  useEffect(() => {
+    //obtener lista de productos desde el backend
+    if (mostrarTabla) {
+      setEjecutarConsulta(true);
+    }
+  }, [mostrarTabla]);
+  useEffect(() => {
+    if (mostrarTabla) {
+      setTextoBoton('Listar ventas');
+      setColorBoton('indigo');
+    } else {
+      setTextoBoton('Crear venta');
+      setColorBoton('green');
+    }
+  }, [mostrarTabla]);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -84,6 +104,14 @@ const Ventas = () => {
     <div className='flex h-full w-full items-center justify-center my-9'>
       <form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
         <h1 className='text-3xl font-extrabold text-gray-900 my-3'>Registro de ventas</h1>
+        <button
+          onClick={() => {
+            setMostrarTabla(!mostrarTabla);
+          }}
+          className={`text-white bg-${colorBoton}-500 p-5 rounded-full m-6 w-28 self-end`}
+        >
+          {textoBoton}
+        </button>
         <label className='flex flex-col' htmlFor='vendedor'>
           <span className='text-2xl font-gray-900'>***Informacion General***</span>
           <div className='border-2 rounded-md h-16 my-3 bg-green-100'>
@@ -99,11 +127,20 @@ const Ventas = () => {
           </div>
         </label>
 
+        {mostrarTabla ? (
+        <datosVenta 
+        loading={loading}
+        listaProductos={productos} 
+        vendedor={vendedor}
+        unidad={unidad}
+        setEjecutarConsulta={setEjecutarConsulta} />
+      ) : (
         <TablaProductos
           productos={productos}
           setProductos={setProductos}
           setProductosTabla={setProductosTabla}
         />
+      )}
 
         <label className='flex flex-col'>
           <span className='text-2xl font-gray-900'>Valor Total Venta</span>
